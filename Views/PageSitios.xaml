@@ -119,7 +119,6 @@
                 <Button Text="Grabar" Clicked="Start" x:Name="btnStart" />
                 <Button Text="Detener" Clicked="Stop" IsEnabled="False" x:Name="btnStop" />
 
-
                 <Button Clicked="Guardar"
                         x:Name="btnGuardar"
                         Text="Guardar"
