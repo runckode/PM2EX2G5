@@ -64,23 +64,35 @@ public partial class PageSitios : ContentPage
         }
     }
 
-
+    private bool isRecording = false;
     private async void Start(object sender, EventArgs e)
     {
+        
+        if (isRecording)
+        {
+            isRecording = false;
+            Stop(sender,e);
+            return;
+        }
         bool hasMicrofone = await ComprobarPermisos<Microphone>();
+        
         if (hasMicrofone)
         {
+            isRecording = true;
             audioRecorder = audioManager.CreateRecorder();
-            
             await audioRecorder.StartAsync();
-
-            img.Source = "stop.png";
-
+            btnStart.ImageSource = "stop.png";
         }
+        
+    }
+    
+    private async void Stop(object sender, EventArgs e)
+    {
+        audioSource = await audioRecorder.StopAsync();
+        recordingStopwatch.Stop();
 
-        btnStop.IsEnabled = true;
-        PlaybackSlider.IsEnabled = true;
-        btnStart.IsEnabled = false;
+        btnStart.ImageSource = "play.png";
+        btnGuardar.IsEnabled = true;
     }
 
     private async void Guardar(object sender, EventArgs e)
@@ -107,7 +119,7 @@ public partial class PageSitios : ContentPage
         audioBytes = new byte[0];
         audioSource = null;
         btnGuardar.IsEnabled = false;
-
+      
         var mysqlRecord = new CreateSitioCmd()
         {
             Descripcion = txtDescription.Text,
@@ -140,17 +152,7 @@ public partial class PageSitios : ContentPage
         }
     }
 
-    private async void Stop(object sender, EventArgs e)
-    {
-        audioSource = await audioRecorder.StopAsync();
-        recordingStopwatch.Stop();
 
-        img.Source = "play.png";
-
-        btnStop.IsEnabled = false;
-        btnStart.IsEnabled = true;
-        btnGuardar.IsEnabled = true;
-    }
 
     public static async Task<bool> ComprobarPermisos<TPermission>()
         where TPermission : BasePermission, new()

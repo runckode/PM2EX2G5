@@ -106,18 +106,17 @@
                             Grid.Row="0"
                             Grid.Column="0" />
 
-                    <Frame Grid.Row="0" 
-                           Height="50"
-                           Width="50"
-                           CornerRadius="50"
-                           Grid.Column="1">
-                        <Image x:Name="img"
-                               Source="play.png" />
-                    </Frame>
+                    <Button
+                        Grid.Column="1"
+                        Clicked="Start"
+                        CornerRadius="50"
+                        HeightRequest="90"
+                        WidthRequest="90"
+                        ImageSource="play.png"
+                        x:Name="btnStart" />
                 </Grid>
 
-                <Button Text="Grabar" Clicked="Start" x:Name="btnStart" />
-                <Button Text="Detener" Clicked="Stop" IsEnabled="False" x:Name="btnStop" />
+
 
                 <Button Clicked="Guardar"
                         x:Name="btnGuardar"
