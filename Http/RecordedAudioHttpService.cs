@@ -63,7 +63,7 @@ public class RecordedAudioHttpService
         if (isOk)
         {
             string content = await response.Content.ReadAsStringAsync();
-          
+
             Items = JsonSerializer.Deserialize<List<SitiosResponse>>(content);
         }
 

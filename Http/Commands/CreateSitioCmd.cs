@@ -6,6 +6,6 @@ public class CreateSitioCmd
     public double Latitud { get; set; } 
     public double Longitud { get; set; }
     public string Descripcion { get; set; } = string.Empty;
-    public byte[] FirmaDigital { get; set; }
-    public byte[] AudioFile { get; set; }
+    public string FirmaDigital { get; set; }
+    public string AudioFile { get; set; }
 }

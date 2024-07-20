@@ -123,8 +123,10 @@ public partial class PageSitios : ContentPage
         var mysqlRecord = new CreateSitioCmd()
         {
             Descripcion = txtDescription.Text,
-            AudioFile = audioBytes,
-            FirmaDigital = new byte[0],
+            AudioFile = "saf",
+            FirmaDigital = "fads",
+            //AudioFile = audioBytes,
+            //FirmaDigital = new byte[0],
             Latitud = _geolcationViewModel.Latitude,
             Longitud = _geolcationViewModel.Longitude
         };

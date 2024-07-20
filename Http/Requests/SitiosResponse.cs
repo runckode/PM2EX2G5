@@ -6,6 +6,6 @@ public class SitiosResponse
     public double Latitud { get; set; } 
     public double Longitud { get; set; }
     public string Descripcion { get; set; } = string.Empty;
-    public byte[] FirmaDigital { get; set; }
-    public byte[] AudioFile { get; set; }
+    public byte[]? FirmaDigital { get; set; }
+    public byte[]? AudioFile { get; set; }
 }
