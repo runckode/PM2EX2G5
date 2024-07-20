@@ -49,7 +49,7 @@ public partial class PageSitiosList : ContentPage
                 break;
 
             case "Audio":
-                VerUbicacion(sitio);
+                Audio(sitio);
                 break;
         }
     }
@@ -110,6 +110,12 @@ public partial class PageSitiosList : ContentPage
             Debug.WriteLine("Error al obtener los sitios: " + ex.Message);
             return new List<SitiosResponse>();
         }
+    }
+
+    private void Audio(SitiosResponse sitio)
+    {
+        PageAudio page = new PageAudio(sitio);
+        Navigation.PushAsync(page);
     }
     private void ToolbarItem_Clicked(object sender, EventArgs e)
     {
