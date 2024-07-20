@@ -4,8 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
              x:Class="PM2EX2G5.Views.PageSitios"
-             Title="Sitios">
-
+      
+             Title="Examen Segundo Parcial"
+             BackgroundImageSource="backgroundfirma.png">
 
     <VerticalStackLayout>
         <Grid>
@@ -50,29 +51,51 @@
                     VerticalOptions="Center" />
 
 
-                <Label
-                    Text="Latitud"
-                    VerticalOptions="Start"
-                    HorizontalOptions="Start"
-                    Margin="20,20,20,0" />
-                <Entry
-                    MaxLength="100"
-                    Text="{Binding  Latitude}"
-                    x:Name="LatitudText"
-                    Keyboard="Text"
-                    Margin="20,0,20,0" />
+                <Grid Margin="20,20,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Label
-                    Text="Longitud"
-                    VerticalOptions="Start"
-                    HorizontalOptions="Start"
-                    Margin="20,20,20,0" />
-                <Entry
-                    Text="{Binding Longitude}"
-                    MaxLength="100"
-                    x:Name="LongitudText"
-                    Keyboard="Text"
-                    Margin="20,0,20,0" />
+                    <!-- Campo de Latitud -->
+                    <Frame Grid.Column="0"
+                           Margin="0,0,10,0"
+                           Padding="5"
+                           BackgroundColor="#F0F0F0"
+                           CornerRadius="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Latitud"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Margin="10,0,0,0" />
+                            <Entry Text="{Binding Latitude}"
+                                   MaxLength="100"
+                                   x:Name="LatitudText"
+                                   Keyboard="Numeric"
+                                   VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Campo de Longitud -->
+                    <Frame Grid.Column="1"
+                           Margin="10,0,0,0"
+                           Padding="5"
+                           BackgroundColor="#F0F0F0"
+                           CornerRadius="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Longitud"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Margin="10,0,0,0" />
+                            <Entry Text="{Binding Longitude}"
+                                   MaxLength="100"
+                                   x:Name="LongitudText"
+                                   Keyboard="Numeric"
+                                   VerticalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
 
                 <Label
                     Text="Descripcion"
@@ -85,7 +108,7 @@
                     x:Name="txtDescription"
                     Margin="20,0,20,0"
                     AutoSize="TextChanges"
-                    HeightRequest="100" />
+                    HeightRequest="70" />
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -117,12 +140,11 @@
                 </Grid>
 
 
-
                 <Button Clicked="Guardar"
                         x:Name="btnGuardar"
                         Text="Guardar"
                         ImageSource="guardar.png"
-                        Background="Green"
+                        Background="#F0CF15"
                         WidthRequest="200"
                         HeightRequest="50"
                         HorizontalOptions="Fill"
