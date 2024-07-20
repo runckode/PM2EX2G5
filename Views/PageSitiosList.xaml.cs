@@ -1,3 +1,4 @@
+using PM2EX2G5.Http.Requests;
 using PM2EX2G5.Models;
 using PM2EX2G5.Services;
 
@@ -7,8 +8,8 @@ public partial class PageSitiosList : ContentPage
 {
     private RecordedAudioHttpService _service;
     public PageSitiosList()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         _service = new RecordedAudioHttpService();
     }
 
@@ -28,7 +29,7 @@ public partial class PageSitiosList : ContentPage
         if (frame == null)
             return;
 
-        var sitio = frame.BindingContext as Sitios;
+        var sitio = frame.BindingContext as SitiosResponse;
 
         string action = await DisplayActionSheet("Opciones", "Cancelar", null, "Editar", "Eliminar", "Ver Ubicación", "Audio");
 
@@ -50,21 +51,21 @@ public partial class PageSitiosList : ContentPage
         }
     }
 
-    private void EditarSitio(Sitios sitio)
+    private void EditarSitio(SitiosResponse sitio)
     {
-        PageSitios page = new PageSitios(/*sitio.Id*/);
+        PageSitios page = new PageSitios(/* sitio.Id */);
         Navigation.PushAsync(page);
     }
 
-    private void EliminarSitio(Sitios sitio)
+    private void EliminarSitio(SitiosResponse sitio)
     {
-        PageSitios page = new PageSitios(/*sitio.Id, true*/);
+        PageSitios page = new PageSitios(/* sitio.Id, true */);
         Navigation.PushAsync(page);
     }
 
-    private void VerUbicacion(Sitios sitio)
+    private void VerUbicacion(SitiosResponse sitio)
     {
-        PageLocation page = new PageLocation(/*sitio*/);
+        PageLocation page = new PageLocation(sitio);
         Navigation.PushAsync(page);
     }
     private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -73,11 +74,11 @@ public partial class PageSitiosList : ContentPage
         Navigation.PushAsync(page);
     }
 
-    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
         string searchText = e.NewTextValue.ToLower();
-
-        //SitiosList.ItemsSource = await App.DataBase.GetListSitiosBuscar(searchText);
+        List<SitiosResponse> list = await _service.GetRecordingsAsync();
+        SitiosList.ItemsSource = list.Where(x => x.Descripcion.ToLower().Contains(searchText)).ToList();
     }
 
     private void SitiosList_SelectionChanged(object sender, SelectionChangedEventArgs e)
