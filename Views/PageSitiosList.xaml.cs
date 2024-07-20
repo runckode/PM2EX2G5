@@ -1,6 +1,9 @@
+using PM2EX2G5.Http;
 using PM2EX2G5.Http.Requests;
 using PM2EX2G5.Models;
 using PM2EX2G5.Services;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace PM2EX2G5.Views;
 
@@ -68,10 +71,45 @@ public partial class PageSitiosList : ContentPage
         }
     }
 
-    private void VerUbicacion(SitiosResponse sitio)
+    private async void VerUbicacion(SitiosResponse sitio)
     {
-        PageLocation page = new PageLocation(sitio);
-        Navigation.PushAsync(page);
+        List<SitiosResponse> allSitios = await GetAllSitiosAsync();
+
+        if (allSitios == null || allSitios.Count == 0)
+        {
+            allSitios = new List<SitiosResponse> { sitio };
+        }
+
+        if (!allSitios.Contains(sitio))
+        {
+            allSitios.Add(sitio);
+        }
+
+        PageLocation page = new PageLocation(sitio, allSitios);
+        await Navigation.PushAsync(page);
+    }
+
+    //Radio de 100 metros
+    private async Task<List<SitiosResponse>> GetAllSitiosAsync()
+    {
+        try
+        {
+            using HttpClient client = new HttpClient();
+            HttpServiceConf config = new HttpServiceConf();
+            string apiUrl = config.ConfigOnlineEndpoint("https://pm2-examen2-grupo5-api.onrender.com/api/sitios");
+
+            HttpResponseMessage response = await client.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            List<SitiosResponse> sitios = JsonSerializer.Deserialize<List<SitiosResponse>>(responseBody);
+            return sitios ?? new List<SitiosResponse>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Error al obtener los sitios: " + ex.Message);
+            return new List<SitiosResponse>();
+        }
     }
     private void ToolbarItem_Clicked(object sender, EventArgs e)
     {
