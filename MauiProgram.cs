@@ -10,6 +10,7 @@ namespace PM2EX2G5
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiMaps()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
