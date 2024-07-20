@@ -44,7 +44,7 @@ public class RecordedAudioHttpService
             response = await _client.PostAsync(uri, content);
 
             if (response.IsSuccessStatusCode)
-                Debug.WriteLine(@"\tTodoItem successfully saved.");
+                Debug.WriteLine(@"\tGuardado Exitoso!!!");
         }
         catch (Exception ex)
         {

@@ -101,7 +101,7 @@ public partial class PageSitios : ContentPage
         {
             return;
         }
-
+        string base64Firma = await base64ImageFirma.ConvertToBase64Async(drawingViewFirma);
         Stream stream = ((FileAudioSource)audioSource).GetAudioStream();
         byte[] audioBytes;
         using (MemoryStream ms = new MemoryStream())
@@ -114,25 +114,25 @@ public partial class PageSitios : ContentPage
         string filename = $"{DateTime.Now:yyyyMMddHHmmss}.wav";
         string filePath = Path.Combine(appDataPath, filename);
         await File.WriteAllBytesAsync(filePath, audioBytes);
-        string base64 = Convert.ToBase64String(audioBytes);
         
-        audioBytes = new byte[0];
+        //audioBytes = new byte[0];
+        string audiobase64 = Convert.ToBase64String(audioBytes);
         audioSource = null;
         btnGuardar.IsEnabled = false;
       
         var mysqlRecord = new CreateSitioCmd()
         {
-            Descripcion = txtDescription.Text,
-            AudioFile = "saf",
-            FirmaDigital = "fads",
+            descripcion = txtDescription.Text,
+            audioFile = audiobase64,
+            firmaDigital = base64Firma,
             //AudioFile = audioBytes,
             //FirmaDigital = new byte[0],
-            Latitud = _geolcationViewModel.Latitude,
-            Longitud = _geolcationViewModel.Longitude
+            latitud = _geolcationViewModel.Latitude,
+            longitud = _geolcationViewModel.Longitude
         };
         await _service.AddRecordingAsync(mysqlRecord);
 
-        await DisplayAlert("Aviso", "Audio guardado correctamente", "Ok");
+        await DisplayAlert("Exito", "¡Sitio guardado correctamente!", "Ok");
         txtDescription.Text = "";
     }
 

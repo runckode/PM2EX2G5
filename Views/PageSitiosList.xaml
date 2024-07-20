@@ -2,7 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PM2EX2G5.Views.PageSitiosList"
+             xmlns:conver="clr-namespace:PM2EX2G5.ViewModels"
              Title="Listado">
+
+    <ContentPage.Resources>
+        <conver:Base64ToImage x:Key="BaseString"/>
+        <Style x:Key="AuthorLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="TextColor" Value="#333333"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Agregar" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -37,15 +48,20 @@
                             </Grid.ColumnDefinitions>
 
                             <Frame HeightRequest="80"
-                        WidthRequest="80"
-                        CornerRadius="40"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        IsClippedToBounds="True"
-                        Padding="0"
-                        BorderColor="#890101"
-                        Margin="0">
-
+                                WidthRequest="80"
+                                CornerRadius="40"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                IsClippedToBounds="True"
+                                Padding="0"
+                                BorderColor="#890101"
+                                Margin="0">
+                                <Image Grid.Column="0"
+                                    x:Name="FirmaDigitalStr"
+                                    Source="{Binding FirmaDigitalStr, Converter={StaticResource BaseString}}"
+                                    Aspect="AspectFill"
+                                    HeightRequest="80"
+                                    WidthRequest="80"/>
                             </Frame>
                             <StackLayout Grid.Column="1"
                           VerticalOptions="Center"

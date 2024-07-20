@@ -8,4 +8,6 @@ public class SitiosResponse
     public string Descripcion { get; set; } = string.Empty;
     public byte[]? FirmaDigital { get; set; }
     public byte[]? AudioFile { get; set; }
+    public String? FirmaDigitalStr { get; set; }
+    public String? AudioFileStr { get; set; }
 }

@@ -2,10 +2,10 @@ namespace PM2EX2G5.Http.Commands;
 
 public class CreateSitioCmd
 {
-    public int Id { get; set; }
-    public double Latitud { get; set; } 
-    public double Longitud { get; set; }
-    public string Descripcion { get; set; } = string.Empty;
-    public string FirmaDigital { get; set; }
-    public string AudioFile { get; set; }
+    public int id { get; set; }
+    public double latitud { get; set; } 
+    public double longitud { get; set; }
+    public string descripcion { get; set; } = string.Empty;
+    public string firmaDigital { get; set; }
+    public string audioFile { get; set; }
 }
