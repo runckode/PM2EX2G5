@@ -53,14 +53,19 @@ public partial class PageSitiosList : ContentPage
 
     private void EditarSitio(SitiosResponse sitio)
     {
-        PageSitios page = new PageSitios(/* sitio.Id */);
+        PageEdit page = new PageEdit(sitio);
         Navigation.PushAsync(page);
     }
 
-    private void EliminarSitio(SitiosResponse sitio)
+    private async void EliminarSitio(SitiosResponse sitio)
     {
-        PageSitios page = new PageSitios(/* sitio.Id, true */);
-        Navigation.PushAsync(page);
+        bool resultado = await DisplayAlert("Eliminar", "¿Desea eliminar este sitio?", "Sí", "No");
+        if (resultado)
+        {
+            PeticionEliminar(sitio.Id);
+            //PeticionEliminar(1);
+            await ActualizarLista();
+        }
     }
 
     private void VerUbicacion(SitiosResponse sitio)
@@ -89,5 +94,39 @@ public partial class PageSitiosList : ContentPage
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
 
+    }
+
+    public async Task PeticionEliminar(int id)
+    {
+        HttpClient _client = new HttpClient();
+
+        HttpResponseMessage response;
+        string url = $" https://pm2-examen2-grupo5-api.onrender.com/api/sitios/{id}";
+
+        try
+        {
+            // Realizar la solicitud DELETE
+            response = await _client.DeleteAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Éxito", "Ítem eliminado exitosamente", "Aceptar");
+            }
+            else
+            {
+                string errorMessage = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Error", $"Hubo un error al eliminar el ítem: {errorMessage}", "Aceptar");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Se produjo una excepción: {ex.Message}", "Aceptar");
+        }
+    }
+
+    private async Task ActualizarLista()
+    {
+        var list = await _service.GetRecordingsAsync();
+        SitiosList.ItemsSource = list;
     }
 }

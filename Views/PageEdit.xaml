@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			  xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="PM2EX2G5.Views.PageEdit"
+             Title="Editar">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+            <Frame
+             Grid.Row="0"
+             Margin="10,10,10,10"
+             Padding="5,10,5,10"
+             CornerRadius="10">
+                <mct:DrawingView
+                 x:Name="drawingViewFirma"
+                 BackgroundColor="White"
+                 DrawingLineStarted="drawingViewFirma_DrawingLineStarted"
+                 HeightRequest="150"
+                 HorizontalOptions="Center"
+                 IsMultiLineModeEnabled="True"
+                 LineColor="Black"
+                 VerticalOptions="Start"
+                 WidthRequest="350" />
+            </Frame>
+
+            <Button
+             x:Name="btnBorrar"
+             Margin="0,10,10,0"
+             BackgroundColor="Red"
+             BorderColor="White"
+             FontAttributes="Bold"
+             Clicked="btnBorrar_Clicked"
+             CornerRadius="20"
+             FontSize="12"
+             HeightRequest="35"
+             HorizontalOptions="Center"
+             SemanticProperties.Hint="Limpiar"
+             Text="Limpiar"
+             TextColor="White"
+             VerticalOptions="Center" />
+
+
+            <Label
+             Text="Latitud"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             Margin="20,20,20,0" />
+            <Entry
+             MaxLength="100"
+             Text="{Binding Latitud}"
+             x:Name="LatitudText"
+             Keyboard="Text"
+             Margin="20,0,20,0" />
+
+            <Label
+             Text="Longitud"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             Margin="20,20,20,0" />
+            <Entry
+             Text="{Binding Longitud}"
+             MaxLength="100"
+             x:Name="LongitudText"
+             Keyboard="Text"
+             Margin="20,0,20,0" />
+
+            <Button
+            x:Name="ActulizarUbicacion"
+            Margin="0,10,10,0"
+            BackgroundColor="BlueViolet"
+            BorderColor="White"
+            FontAttributes="Bold"
+            Clicked="btnActulizarUbicacion"
+            CornerRadius="20"
+            FontSize="12"
+            HeightRequest="35"
+            HorizontalOptions="Center"
+            SemanticProperties.Hint="Limpiar"
+            Text="Obtener ubicación"
+            TextColor="White"
+            VerticalOptions="Center" />
+
+            <Label
+             Text="Descripcion"
+             VerticalOptions="Start"
+             HorizontalOptions="Start"
+             Margin="20,20,20,0" />
+
+            <Editor
+             Text="{Binding Descripcion}"
+             x:Name="txtDescription"
+             Margin="20,0,20,0"
+             AutoSize="TextChanges"
+             HeightRequest="100" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+
+                <Slider x:Name="PlaybackSlider"
+                     Minimum="0"
+                     Maximum="1"
+                     Value="1"
+                     DragCompleted="OnSliderDragCompleted"
+                     Grid.Row="0"
+                     Grid.Column="0" />
+
+                <Button
+                 Grid.Column="1"
+                 Clicked="Start"
+                 CornerRadius="50"
+                 HeightRequest="90"
+                 WidthRequest="90"
+                 ImageSource="play.png"
+                 x:Name="btnStart" />
+            </Grid>
+
+
+
+            <Button Clicked="Actualizar"
+                 x:Name="btnGuardar"
+                 Text="Actualizar"
+                 ImageSource="guardar.png"
+                 Background="Green"
+                 WidthRequest="200"
+                 HeightRequest="50"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="End"
+                 Margin="20,10,20,10"
+                 IsEnabled="True"
+                 CornerRadius="20" />
+
+
+        </VerticalStackLayout>
+
+
+
+    </Grid>
+</ContentPage>
