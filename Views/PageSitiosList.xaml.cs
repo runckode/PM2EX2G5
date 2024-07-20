@@ -30,22 +30,43 @@ public partial class PageSitiosList : ContentPage
 
         var sitio = frame.BindingContext as Sitios;
 
-        //string action = await DisplayActionSheet("Opciones", "Cancelar", null, "Editar", "Eliminar", "Ver Ubicación");
+        string action = await DisplayActionSheet("Opciones", "Cancelar", null, "Editar", "Eliminar", "Ver Ubicación", "Audio");
 
-        //switch (action)
-        //{
-        //    case "Editar":
-        //        EditarSitio(sitio);
-        //        break;
-        //    case "Eliminar":
-        //        EliminarSitio(sitio);
-        //        break;
-        //    case "Ver Ubicación":
-        //        VerUbicacion(sitio);
-        //        break;
-        //}
+        switch (action)
+        {
+            case "Editar":
+                EditarSitio(sitio);
+                break;
+            case "Eliminar":
+                EliminarSitio(sitio);
+                break;
+            case "Ver Ubicación":
+                VerUbicacion(sitio);
+                break;
+
+            case "Audio":
+                VerUbicacion(sitio);
+                break;
+        }
     }
 
+    private void EditarSitio(Sitios sitio)
+    {
+        PageSitios page = new PageSitios(/*sitio.Id*/);
+        Navigation.PushAsync(page);
+    }
+
+    private void EliminarSitio(Sitios sitio)
+    {
+        PageSitios page = new PageSitios(/*sitio.Id, true*/);
+        Navigation.PushAsync(page);
+    }
+
+    private void VerUbicacion(Sitios sitio)
+    {
+        PageLocation page = new PageLocation(/*sitio*/);
+        Navigation.PushAsync(page);
+    }
     private void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         PageSitios page = new PageSitios();
