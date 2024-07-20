@@ -136,11 +136,6 @@ public partial class PageSitios : ContentPage
         txtDescription.Text = "";
     }
 
-    private async void Lista(object sender, EventArgs e)
-    {
-        //await Navigation.PushAsync(new Listado());
-    }
-
     private async void Play(object sender, EventArgs e)
     {
         if (audioSource != null)
@@ -199,10 +194,6 @@ public partial class PageSitios : ContentPage
 
     private void drawingViewFirma_DrawingLineStarted(object sender,
         CommunityToolkit.Maui.Core.DrawingLineStartedEventArgs e)
-    {
-    }
-
-    private void btnGuardar_Clicked(object sender, EventArgs e)
     {
     }
 
