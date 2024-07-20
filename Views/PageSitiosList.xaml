@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2EX2G5.Views.PageSitiosList"
+             Title="Listado">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout Padding="10">
+        <SearchBar x:Name="SearchBar" Placeholder="Buscar..." TextChanged="SearchBar_TextChanged" Margin="0,0,0,10"/>
+        <CollectionView x:Name="SitiosList"
+                 SelectionMode="Single"
+                 SelectionChanged="SitiosList_SelectionChanged"
+                 ItemsLayout="VerticalList">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,5"
+                    Padding="10"
+                    HasShadow="True"
+                    CornerRadius="10"
+                    BackgroundColor="#FAF6F0"
+                    BorderColor="#dddddd">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemSelected" CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame HeightRequest="80"
+                        WidthRequest="80"
+                        CornerRadius="40"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsClippedToBounds="True"
+                        Padding="0"
+                        BorderColor="#890101"
+                        Margin="0">
+
+                            </Frame>
+                            <StackLayout Grid.Column="1"
+                          VerticalOptions="Center"
+                          Padding="10,0">
+                                <Label Text="{Binding Descripcion}"
+                               Style="{StaticResource AuthorLabelStyle}"
+                               FontAttributes="Bold"/>
+                                <Label Text="{Binding Latitud}"
+                                Style="{StaticResource AuthorLabelStyle}"
+                                FontAttributes="Bold"/>
+                                <Label Text="{Binding Longitud}"
+                               Style="{StaticResource AuthorLabelStyle}"
+                               FontAttributes="Bold"/>
+                            </StackLayout>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
